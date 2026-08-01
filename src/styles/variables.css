@@ -1,0 +1,69 @@
+:root {
+  /* Strict SaaS Brand Palette */
+  --color-primary-forest: #1F4D3A;
+  --color-emerald: #2E6A4F;
+  --color-sage: #6E8B74;
+  --color-light-sage: #E8F0EA;
+  --color-gold: #C8A951;
+  --color-warm-ivory: #F5F6F2;
+  --color-white: #FFFFFF;
+  --color-charcoal: #1E293B;
+
+  /* Additional State Colors */
+  --color-danger: #DC2626;
+  --color-warning: #D97706;
+  --color-info: #0284C7;
+  --color-success: #16A34A;
+  --color-muted: #64748B;
+  --color-border: #D3DCD6;
+
+  /* Aliases for eGram SaaS App */
+  --eg-primary: var(--color-primary-forest);
+  --eg-primary-hover: #163A2C;
+  --eg-secondary: var(--color-emerald);
+  --eg-sage: var(--color-sage);
+  --eg-light-sage: var(--color-light-sage);
+  --eg-gold: var(--color-gold);
+  --eg-bg: var(--color-warm-ivory);
+  --eg-card-bg: var(--color-white);
+  --eg-text-main: var(--color-charcoal);
+  --eg-text-muted: var(--color-muted);
+  --eg-border: var(--color-border);
+
+  /* Typography Families */
+  --font-marathi: 'Noto Sans Devanagari', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-english: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Spacing Scale (4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 100) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-100: 100px;
+
+  /* Border Radius System */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-card: 20px;
+  --radius-modal: 24px;
+  --radius-pill: 9999px;
+
+  /* Container Max Width */
+  --max-width-container: 1320px;
+
+  /* Shadows System */
+  --shadow-sm: 0 2px 4px rgba(31, 77, 58, 0.04);
+  --shadow-soft: 0 4px 14px rgba(31, 77, 58, 0.06);
+  --shadow-medium: 0 8px 24px rgba(31, 77, 58, 0.10);
+  --shadow-elevated: 0 16px 40px rgba(31, 77, 58, 0.15);
+  --shadow-hover: 0 12px 32px rgba(31, 77, 58, 0.14);
+}

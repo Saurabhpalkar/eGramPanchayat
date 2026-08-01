@@ -1,0 +1,50 @@
+{
+  "appName": "ई-ग्रामपंचायत",
+  "appTagline": "डिजिटल ग्रामपंचायत SaaS पोर्टल",
+  "heroTitle": "तुमची ग्रामपंचायत आता ऑनलाइन",
+  "heroSubtitle": "ग्रामपंचायत सेवा, दाखले, तक्रारी, विकास कामे, निधी माहिती आणि नागरिक सेवा आता तुमच्या मोबाईलवर.",
+  "startServices": "सेवा सुरू करा",
+  "registerComplaint": "तक्रार नोंदवा",
+  "trackApplication": "अर्जाची स्थिती तपासा",
+  "quickServices": "नागरिक सेवा",
+  "servicesSubtitle": "घरबसल्या दाखले व परवान्यांसाठी अर्ज करा",
+  "complaintsTitle": "तक्रार निवारण",
+  "complaintsSubtitle": "पाणी, रस्ते, स्वच्छता व वीज समस्या त्वरित नोंदवा",
+  "devWorksTitle": "ग्राम विकास कामे",
+  "devWorksSubtitle": "गावातील प्रगतीपथावरील व प्रस्तावित विकास योजना",
+  "nidhiTitle": "शासकीय निधी व अनुदान",
+  "nidhiSubtitle": "आमदार, खासदार, जिल्हा परिषद व पंचायत समिती निधी वाटप",
+  "gramSabhaTitle": "ग्रामसभा व बैठका",
+  "noticesTitle": "महत्वाच्या सूचना व जाहीर प्रकटन",
+  "schemesTitle": "शासकीय योजना",
+  "stats": {
+    "citizens": "एकूण नागरिक",
+    "applications": "प्रक्रिया केलेले अर्ज",
+    "complaintsResolved": "निवारण झालेल्या तक्रारी",
+    "worksCompleted": "पूर्ण विकास कामे",
+    "fundsUtilized": "निधी वापर (रु.)"
+  },
+  "roles": {
+    "public": "सार्वजनिक पोर्टल",
+    "citizen": "नागरिक (Citizen)",
+    "staff": "ग्रामपंचायत कर्मचारी (Staff)",
+    "admin": "सरपंच / ग्रामसेवक (Admin)",
+    "superadmin": "SaaS सुपर ॲडमिन"
+  },
+  "nav": {
+    "home": "मुख्य पृष्ठ",
+    "services": "सेवा व दाखले",
+    "track": "अर्ज ट्रॅक करा",
+    "complaints": "तक्रार नोंदवा",
+    "works": "विकास कामे",
+    "upcomingWorks": "प्रस्तावित कामे",
+    "nidhi": "निधी माहिती",
+    "sabha": "ग्रामसभा",
+    "notices": "सूचना फलक",
+    "schemes": "योजना",
+    "about": "माहिती",
+    "contact": "संपर्क",
+    "login": "लॉगिन",
+    "register": "नोंदणी"
+  }
+}

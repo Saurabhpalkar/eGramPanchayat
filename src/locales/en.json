@@ -1,0 +1,50 @@
+{
+  "appName": "eGram Panchayat",
+  "appTagline": "Digital Gram Panchayat SaaS Portal",
+  "heroTitle": "Your Gram Panchayat is Now Online",
+  "heroSubtitle": "Village services, certificates, complaints, development projects, fund details, and citizen services now on your mobile.",
+  "startServices": "Start Services",
+  "registerComplaint": "Register Complaint",
+  "trackApplication": "Track Application",
+  "quickServices": "Citizen Services",
+  "servicesSubtitle": "Apply for certificates and licenses from home",
+  "complaintsTitle": "Grievance Redressal",
+  "complaintsSubtitle": "Report water supply, road, sanitation, and street light issues instantly",
+  "devWorksTitle": "Village Development Works",
+  "devWorksSubtitle": "Ongoing and proposed infrastructure projects in village",
+  "nidhiTitle": "Government Funds & Grants",
+  "nidhiSubtitle": "MLA, MP, Zilla Parishad & Panchayat Samiti fund allocation",
+  "gramSabhaTitle": "Gram Sabha Meetings",
+  "noticesTitle": "Important Notices & Public Announcements",
+  "schemesTitle": "Government Schemes",
+  "stats": {
+    "citizens": "Total Citizens",
+    "applications": "Processed Applications",
+    "complaintsResolved": "Resolved Complaints",
+    "worksCompleted": "Completed Projects",
+    "fundsUtilized": "Funds Utilized (₹)"
+  },
+  "roles": {
+    "public": "Public Portal",
+    "citizen": "Citizen User",
+    "staff": "Panchayat Staff",
+    "admin": "Sarpanch / Admin",
+    "superadmin": "SaaS Super Admin"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "track": "Track Application",
+    "complaints": "Complaints",
+    "works": "Development Works",
+    "upcomingWorks": "Upcoming Works",
+    "nidhi": "Village Funds",
+    "sabha": "Gram Sabha",
+    "notices": "Notice Board",
+    "schemes": "Schemes",
+    "about": "About Us",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register"
+  }
+}

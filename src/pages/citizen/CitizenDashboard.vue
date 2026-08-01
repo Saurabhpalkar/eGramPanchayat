@@ -1,0 +1,89 @@
+<template>
+  <div>
+    <DashboardHeader title="नागरिक डॅशबोर्ड (Citizen Workspace)" subtitle="माझे ऑनलाईन दाखले व तक्रारी" />
+
+    <!-- Welcome Banner -->
+    <div class="eg-card p-4 my-3 bg-success bg-opacity-10 border-success border-opacity-25">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div>
+          <h4 class="fw-bold text-success mb-1">नमस्कार, {{ user.name }}!</h4>
+          <p class="text-xs text-muted font-sans mb-0">
+            आधार क्रमांक: {{ user.citizenAadhaar }} | {{ user.panchayatName }} (वॉर्ड ३)
+          </p>
+        </div>
+        <router-link to="/citizen/apply" class="btn btn-eg-primary btn-sm rounded-pill font-sans fw-bold">
+          <i class="bi bi-plus-circle me-1"></i> नवीन दाखल्यासाठी अर्ज करा
+        </router-link>
+      </div>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <StatsCard icon="bi-file-earmark-check" label="माझे एकूण अर्ज" :value="myAppsCount" variant="green" />
+      </div>
+      <div class="col-6 col-md-3">
+        <StatsCard icon="bi-award" label="मंजूर दाखले" :value="myApprovedCount" variant="gold" />
+      </div>
+      <div class="col-6 col-md-3">
+        <StatsCard icon="bi-exclamation-triangle" label="माझ्या तक्रारी" :value="myComplaintsCount" variant="blue" />
+      </div>
+      <div class="col-6 col-md-3">
+        <StatsCard icon="bi-bell" label="नवीन सूचना" value="2" variant="red" />
+      </div>
+    </div>
+
+    <!-- My Recent Applications Section -->
+    <div class="eg-card p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold text-success mb-0"><i class="bi bi-journal-check me-1"></i> माझे अलीकडील अर्ज</h5>
+        <router-link to="/citizen/applications" class="text-xs text-success fw-bold">सर्व अर्ज पाहा <i class="bi bi-chevron-right"></i></router-link>
+      </div>
+
+      <ResponsiveTable>
+        <template #head>
+          <tr>
+            <th>अर्ज क्रमांक</th>
+            <th>दाखला / सेवा</th>
+            <th>दाखल तारीख</th>
+            <th>अंतिम मुदत</th>
+            <th>सद्यस्थिती</th>
+            <th>ॲक्शन</th>
+          </tr>
+        </template>
+        <template #body>
+          <tr v-for="app in myApplications" :key="app.id">
+            <td><strong class="text-dark">{{ app.applicationNo }}</strong></td>
+            <td>{{ app.serviceNameMr }}</td>
+            <td>{{ app.appliedDate }}</td>
+            <td><span class="text-warning">{{ app.dueDate }}</span></td>
+            <td><StatusBadge :status="app.status" :text="app.statusMr" /></td>
+            <td>
+              <router-link :to="{ path: '/track', query: { id: app.applicationNo } }" class="btn btn-sm btn-outline-success rounded-pill px-2.5 py-0.5 text-xs">
+                ट्रॅक करा
+              </router-link>
+            </td>
+          </tr>
+        </template>
+      </ResponsiveTable>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useAuth } from '../../composables/useAuth';
+import { useMockData } from '../../composables/useMockData';
+import DashboardHeader from '../../components/common/DashboardHeader.vue';
+import StatsCard from '../../components/common/StatsCard.vue';
+import StatusBadge from '../../components/common/StatusBadge.vue';
+import ResponsiveTable from '../../components/common/ResponsiveTable.vue';
+
+const { user } = useAuth();
+const { citizenApplications, complaints } = useMockData();
+
+const myApplications = computed(() => citizenApplications.value);
+const myAppsCount = computed(() => myApplications.value.length);
+const myApprovedCount = computed(() => myApplications.value.filter(a => a.status === 'Certificate Generated').length);
+const myComplaintsCount = computed(() => complaints.value.length);
+</script>

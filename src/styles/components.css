@@ -1,0 +1,263 @@
+/* Standardized UI Component System */
+
+/* ----------------------------------
+   BUTTON SYSTEM
+---------------------------------- */
+.btn-eg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  font-family: var(--font-marathi);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+/* Button Sizes */
+.btn-eg-sm {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.825rem;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+}
+
+.btn-eg-md {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  min-height: 44px;
+  border-radius: var(--radius-md);
+}
+
+.btn-eg-lg {
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+  min-height: 48px;
+  border-radius: var(--radius-lg);
+}
+
+.btn-eg-xl {
+  padding: 1rem 2.25rem;
+  font-size: 1.05rem;
+  min-height: 54px;
+  border-radius: var(--radius-pill);
+}
+
+/* Button Variants */
+.btn-eg-primary {
+  background-color: var(--color-primary-forest) !important;
+  color: var(--color-white) !important;
+  box-shadow: var(--shadow-sm);
+}
+.btn-eg-primary:hover, .btn-eg-primary:focus {
+  background-color: var(--color-emerald) !important;
+  color: var(--color-white) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.btn-eg-secondary {
+  background-color: var(--color-light-sage) !important;
+  color: var(--color-primary-forest) !important;
+  border: 1px solid var(--color-sage) !important;
+}
+.btn-eg-secondary:hover {
+  background-color: #DCE7E0 !important;
+  color: var(--color-primary-forest) !important;
+  transform: translateY(-1px);
+}
+
+.btn-eg-outline {
+  background-color: transparent !important;
+  color: var(--color-primary-forest) !important;
+  border: 2px solid var(--color-primary-forest) !important;
+}
+.btn-eg-outline:hover {
+  background-color: var(--color-primary-forest) !important;
+  color: var(--color-white) !important;
+  transform: translateY(-1px);
+}
+
+.btn-eg-gold {
+  background-color: var(--color-gold) !important;
+  color: var(--color-charcoal) !important;
+  font-weight: 700;
+}
+.btn-eg-gold:hover {
+  background-color: #B8963D !important;
+  color: var(--color-white) !important;
+  transform: translateY(-1px);
+}
+
+.btn-eg-danger {
+  background-color: var(--color-danger) !important;
+  color: var(--color-white) !important;
+}
+.btn-eg-danger:hover {
+  background-color: #B91C1C !important;
+  color: var(--color-white) !important;
+  transform: translateY(-1px);
+}
+
+.btn-eg-success {
+  background-color: var(--color-success) !important;
+  color: var(--color-white) !important;
+}
+.btn-eg-success:hover {
+  background-color: #15803D !important;
+  color: var(--color-white) !important;
+  transform: translateY(-1px);
+}
+
+.btn-eg-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ----------------------------------
+   CARD SYSTEM
+---------------------------------- */
+.eg-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--eg-border);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+}
+
+.eg-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-emerald);
+}
+
+/* ----------------------------------
+   FORM CONTROLS SYSTEM
+---------------------------------- */
+.form-control, .form-select {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--eg-border);
+  padding: 0.65rem 1rem;
+  font-family: var(--font-marathi);
+  font-size: 0.9rem;
+  min-height: 44px;
+  background-color: var(--color-white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--color-emerald);
+  box-shadow: 0 0 0 0.2rem rgba(46, 106, 79, 0.15);
+  outline: none;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-4);
+}
+
+/* ----------------------------------
+   MODAL SYSTEM
+---------------------------------- */
+.modal-content {
+  border-radius: var(--radius-modal) !important;
+  border: none;
+  box-shadow: var(--shadow-elevated);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--eg-border);
+  padding: var(--space-16) var(--space-24);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--eg-border);
+  padding: var(--space-12) var(--space-24);
+}
+
+/* ----------------------------------
+   RESPONSIVE TABLE SYSTEM
+---------------------------------- */
+.eg-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--eg-border);
+}
+
+.eg-table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.eg-table th {
+  background-color: var(--color-light-sage);
+  color: var(--color-primary-forest);
+  font-weight: 600;
+  padding: var(--space-12) var(--space-16);
+  border-bottom: 2px solid var(--eg-border);
+  white-space: nowrap;
+}
+
+.eg-table td {
+  padding: var(--space-12) var(--space-16);
+  border-bottom: 1px solid var(--eg-border);
+  vertical-align: middle;
+}
+
+.eg-table tbody tr:hover {
+  background-color: rgba(232, 240, 234, 0.4);
+}
+
+/* ----------------------------------
+   BADGES & STATUS
+---------------------------------- */
+.eg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.775rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.eg-badge-success {
+  background-color: rgba(22, 163, 74, 0.12);
+  color: #15803D;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.eg-badge-warning {
+  background-color: rgba(217, 119, 6, 0.12);
+  color: #B45309;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+}
+
+.eg-badge-danger {
+  background-color: rgba(220, 38, 38, 0.12);
+  color: #B91C1C;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+.eg-badge-info {
+  background-color: rgba(2, 132, 199, 0.12);
+  color: #0369A1;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+}

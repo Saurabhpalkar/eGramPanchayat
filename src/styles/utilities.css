@@ -1,0 +1,58 @@
+/* General CSS Utilities */
+
+.cursor-pointer { cursor: pointer; }
+.transition-all { transition: all 0.25s ease; }
+.hover-shadow:hover { box-shadow: var(--shadow-hover) !important; }
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bg-primary-forest { background-color: var(--color-primary-forest) !important; }
+.bg-emerald { background-color: var(--color-emerald) !important; }
+.bg-sage { background-color: var(--color-sage) !important; }
+.bg-light-sage { background-color: var(--color-light-sage) !important; }
+.bg-gold { background-color: var(--color-gold) !important; }
+.bg-warm-ivory { background-color: var(--color-warm-ivory) !important; }
+
+.text-primary-forest { color: var(--color-primary-forest) !important; }
+.text-emerald { color: var(--color-emerald) !important; }
+.text-gold { color: var(--color-gold) !important; }
+.text-charcoal { color: var(--color-charcoal) !important; }
+
+.border-primary-forest { border-color: var(--color-primary-forest) !important; }
+.border-emerald { border-color: var(--color-emerald) !important; }
+.border-gold { border-color: var(--color-gold) !important; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-warm-ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-emerald);
+}

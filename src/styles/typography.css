@@ -1,0 +1,101 @@
+/* Typography Scale & Font System */
+
+/* Global Body Font Setup */
+body {
+  font-family: var(--font-marathi);
+  color: var(--eg-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings Scale */
+h1, .h1 {
+  font-family: var(--font-marathi);
+  font-size: clamp(2.1rem, 4vw, 2.85rem);
+  font-weight: 700;
+  color: var(--color-primary-forest);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+h2, .h2 {
+  font-family: var(--font-marathi);
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-primary-forest);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+h3, .h3 {
+  font-family: var(--font-marathi);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--color-primary-forest);
+  line-height: 1.35;
+}
+
+h4, .h4 {
+  font-family: var(--font-marathi);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  color: var(--color-primary-forest);
+  line-height: 1.4;
+}
+
+h5, .h5 {
+  font-family: var(--font-marathi);
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  color: var(--color-charcoal);
+  line-height: 1.45;
+}
+
+h6, .h6 {
+  font-family: var(--font-marathi);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  line-height: 1.5;
+}
+
+/* Text Types */
+.body-text, p {
+  font-size: 1rem;
+  color: var(--eg-text-main);
+  line-height: 1.6;
+}
+
+.body-sm, .text-xs-custom {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.caption-text {
+  font-size: 0.8rem;
+  color: var(--eg-text-muted);
+  line-height: 1.4;
+}
+
+.font-sans-eng {
+  font-family: var(--font-english);
+}
+
+.font-marathi-dev {
+  font-family: var(--font-marathi);
+}
+
+/* Button & Nav Text */
+.btn-text {
+  font-family: var(--font-marathi);
+  font-size: 0.925rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.nav-link-text {
+  font-family: var(--font-marathi);
+  font-size: 0.9rem;
+  font-weight: 500;
+}

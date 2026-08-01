@@ -1,0 +1,6 @@
+{
+  "name": "eGram Panchayat",
+  "description": "Digital Gram Panchayat SaaS platform for villages in Maharashtra",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

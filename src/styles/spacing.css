@@ -1,0 +1,31 @@
+/* Spacing System & Utility Helper Classes */
+
+.sp-p-4 { padding: var(--space-4); }
+.sp-p-8 { padding: var(--space-8); }
+.sp-p-12 { padding: var(--space-12); }
+.sp-p-16 { padding: var(--space-16); }
+.sp-p-20 { padding: var(--space-20); }
+.sp-p-24 { padding: var(--space-24); }
+.sp-p-32 { padding: var(--space-32); }
+.sp-p-40 { padding: var(--space-40); }
+.sp-p-48 { padding: var(--space-48); }
+.sp-p-64 { padding: var(--space-64); }
+.sp-p-80 { padding: var(--space-80); }
+.sp-p-100 { padding: var(--space-100); }
+
+.sp-m-4 { margin: var(--space-4); }
+.sp-m-8 { margin: var(--space-8); }
+.sp-m-12 { margin: var(--space-12); }
+.sp-m-16 { margin: var(--space-16); }
+.sp-m-20 { margin: var(--space-20); }
+.sp-m-24 { margin: var(--space-24); }
+.sp-m-32 { margin: var(--space-32); }
+.sp-m-40 { margin: var(--space-40); }
+.sp-m-48 { margin: var(--space-48); }
+
+.sp-gap-8 { gap: var(--space-8); }
+.sp-gap-12 { gap: var(--space-12); }
+.sp-gap-16 { gap: var(--space-16); }
+.sp-gap-20 { gap: var(--space-20); }
+.sp-gap-24 { gap: var(--space-24); }
+.sp-gap-32 { gap: var(--space-32); }
