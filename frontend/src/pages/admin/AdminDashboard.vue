@@ -13,7 +13,7 @@
           </p>
         </div>
         <div class="d-flex gap-2">
-          <router-link to="/admin/works" class="btn btn-eg-gold btn-sm rounded-pill font-sans">
+          <router-link to="/admin/works" class="btn btn-eg-primary btn-sm rounded-pill font-sans">
             <i class="bi bi-buildings-fill me-1"></i> विकास कामे पाहा
           </router-link>
           <router-link to="/admin/notices" class="btn btn-outline-light btn-sm rounded-pill font-sans">

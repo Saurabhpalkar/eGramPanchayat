@@ -22,10 +22,10 @@
 
             <!-- Call-to-Action Buttons -->
             <div class="d-flex flex-wrap gap-3 mb-4">
-              <router-link to="/services" class="btn btn-eg-cta shadow-lg d-inline-flex align-items-center gap-2">
+              <router-link to="/services" class="btn btn-success shadow-lg d-inline-flex align-items-center gap-2">
                 <i class="bi bi-rocket-takeoff-fill fs-5"></i> ऑनलाईन सेवा सुरू करा
               </router-link>
-              <router-link to="/raise-complaint" class="btn btn-eg-outline btn-lg text-white border-white rounded-pill px-4 d-inline-flex align-items-center gap-2 hover-bg-white text-dark">
+              <router-link to="/raise-complaint" class="btn btn-warning btn-lg text-white border-white rounded-pill px-4 d-inline-flex align-items-center gap-2 hover-bg-white text-dark">
                 <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i> तक्रार नोंदवा
               </router-link>
             </div>
@@ -148,7 +148,7 @@
                 <span class="badge bg-white bg-opacity-20 text-white font-sans px-3 py-1.5"><i class="bi bi-signpost-split me-1"></i> रस्ते दुरुस्ती</span>
               </div>
 
-              <router-link to="/raise-complaint" class="btn btn-eg-gold rounded-pill px-4 py-2.5 fw-bold">
+              <router-link to="/raise-complaint" class="btn btn-eg-primary rounded-pill px-4 py-2.5 fw-bold">
                 <i class="bi bi-camera-fill me-1"></i> ऑनलाईन तक्रार नोंदवा
               </router-link>
             </div>

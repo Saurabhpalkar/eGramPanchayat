@@ -118,7 +118,7 @@
                 </button>
               </li>
               <li>
-                <button class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2" :class="{ active: activeRole === 'citizen' }" @click="selectRole('citizen')">
+                <button class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2" :class="{ active: activeRole === 'user' }" @click="selectRole('user')">
                   <i class="bi bi-person-circle text-success fs-5"></i>
                   <div>
                     <div class="fw-semibold">२. नागरिक (Citizen)</div>
@@ -145,7 +145,7 @@
                 </button>
               </li>
               <li>
-                <button class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2" :class="{ active: activeRole === 'superadmin' }" @click="selectRole('superadmin')">
+                <button class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2" :class="{ active: activeRole === 'super_admin' }" @click="selectRole('super_admin')">
                   <i class="bi bi-gear-fill text-dark fs-5"></i>
                   <div>
                     <div class="fw-semibold">५. SaaS सुपर ॲडमिन</div>
@@ -238,11 +238,11 @@
               <div class="dropdown">
                 <button class="btn btn-success bg-opacity-10 text-success border border-success border-opacity-25 btn-sm rounded-pill px-3 d-flex align-items-center gap-2 fw-bold" @click="goToDashboard">
                   <img :src="user.avatar" class="rounded-circle" width="22" height="22" />
-                  <span>{{ user.name.split(' ')[0] }}</span>
+                  <!-- <span> {{ user.name.split(' ')[0] }}</span> -->
                   <i class="bi bi-speedometer2"></i>
                 </button>
               </div>
-              <button class="btn btn-sm btn-outline-danger rounded-circle p-1.5" title="लॉगआउट करा" @click="logout">
+              <button class="btn btn-sm btn-outline-danger rounded-circle p-1.5" title="लॉगआउट करा" @click="handleLogout">
                 <i class="bi bi-power fs-6"></i>
               </button>
             </template>
@@ -276,10 +276,10 @@ const currentLanguageLabel = computed(() => {
 
 const currentRoleName = computed(() => {
   switch (activeRole.value) {
-    case 'citizen': return 'नागरिक डॅशबोर्ड';
+    case 'user': return 'नागरिक डॅशबोर्ड';
     case 'staff': return 'कर्मचारी डॅशबोर्ड';
     case 'admin': return 'सरपंच डॅशबोर्ड';
-    case 'superadmin': return 'SaaS सुपर ॲडमिन';
+    case 'super_admin': return 'SaaS सुपर ॲडमिन';
     default: return 'सार्वजनिक व्ह्यू';
   }
 });
@@ -329,27 +329,33 @@ function changeTenant(tenant: PanchayatTenant) {
 function selectRole(role: UserRole) {
   switchRole(role);
   closeAll();
-  if (role === 'citizen') router.push('/citizen/dashboard');
+  if (role === 'user') router.push('/citizen/dashboard');
   else if (role === 'staff') router.push('/staff/dashboard');
   else if (role === 'admin') router.push('/admin/dashboard');
-  else if (role === 'superadmin') router.push('/superadmin/dashboard');
+  else if (role === 'super_admin') router.push('/superadmin/dashboard');
   else router.push('/');
 }
 
 function goToDashboard() {
   closeAll();
-  if (activeRole.value === 'citizen') router.push('/citizen/dashboard');
+  if (activeRole.value === 'user') router.push('/citizen/dashboard');
   else if (activeRole.value === 'staff') router.push('/staff/dashboard');
   else if (activeRole.value === 'admin') router.push('/admin/dashboard');
-  else if (activeRole.value === 'superadmin') router.push('/superadmin/dashboard');
+  else if (activeRole.value === 'super_admin') router.push('/superadmin/dashboard');
   else router.push('/');
 }
 
-function logout() {
-  switchRole('public');
-  closeAll();
-  router.push('/');
-}
+// function logout() {
+//   switchRole('public');
+//   closeAll();
+//   router.push('/');
+// }
+const { logout } = useAuth();
+
+const handleLogout = async () => {
+  await logout();
+  router.replace('/');
+};
 
 // Click outside handler
 function handleDocumentClick(e: MouseEvent) {

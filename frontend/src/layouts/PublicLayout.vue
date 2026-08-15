@@ -68,7 +68,7 @@
                 <i class="bi bi-envelope-fill text-warning fs-5"></i>
                 <div>
                   <small class="d-block text-white-50 text-xs">ई-मेल संपर्क</small>
-                  <span class="text-white text-xs">helpdesk@egram.maharashtra.gov.in</span>
+                  <span class="text-white text-xs">help@egrampanchayat.gov.in</span>
                 </div>
               </div>
             </div>
@@ -78,13 +78,13 @@
         <hr class="border-secondary opacity-25" />
 
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between text-xs text-white-50 pt-2">
-          <p class="mb-2 mb-md-0">
+          <p class="mb-2 mb-md-0 text-gold">
             © २०२६ ई-ग्रामपंचायत SaaS पोर्टल. सर्व हक्क सुरक्षित. महाराष्ट्र शासन ग्रामविकास विभाग.
           </p>
           <div class="d-flex gap-3">
-            <a href="#" class="text-white-50 text-decoration-none">गोपनीयता धोरण (Privacy)</a>
-            <a href="#" class="text-white-50 text-decoration-none">नियम व अटी</a>
-            <a href="#" class="text-white-50 text-decoration-none">अक्सेसिबिलिटी</a>
+            <a href="#" class="text-gold text-decoration-none">गोपनीयता धोरण (Privacy)</a>
+            <a href="#" class="text-gold text-decoration-none">नियम व अटी</a>
+            <a href="#" class="text-gold text-decoration-none">अक्सेसिबिलिटी</a>
           </div>
         </div>
       </div>

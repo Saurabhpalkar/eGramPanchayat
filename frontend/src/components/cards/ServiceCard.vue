@@ -1,13 +1,13 @@
 <template>
   <div 
     class="eg-card p-4 h-100 d-flex flex-column justify-content-between"
-    :class="service.popular ? 'eg-card-gold-highlight' : 'eg-card-accent'"
+    :class="service.popular ? 'eg-card-accent' : 'eg-card-accent'"
   >
     <div>
       <div class="d-flex align-items-center justify-content-between mb-3">
         <div 
           class="rounded-3 d-flex align-items-center justify-content-center"
-          :class="service.popular ? 'bg-warning bg-opacity-15 text-dark' : 'bg-success bg-opacity-10 text-success'"
+          :class="service.popular ? 'bg-success bg-opacity-10 text-success' : 'bg-success bg-opacity-10 text-success'"
           style="width: 48px; height: 48px; flex-shrink: 0;"
         >
           <i :class="service.icon" class="fs-4"></i>
@@ -43,7 +43,7 @@
       </div>
       <button 
         class="btn btn-sm rounded-pill px-3 text-xs fw-bold font-sans"
-        :class="service.popular ? 'btn-eg-gold' : 'btn-eg-primary'"
+        :class="service.popular ? 'btn-eg-primary' : 'btn-eg-primary'"
         @click="$emit('apply', service)"
       >
         अर्ज करा <i class="bi bi-arrow-right ms-1"></i>

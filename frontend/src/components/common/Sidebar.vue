@@ -25,7 +25,7 @@
     <!-- Role-Based Navigation Links -->
     <div class="flex-grow-1 px-2 overflow-y-auto">
       <!-- Citizen Links -->
-      <div v-if="activeRole === 'citizen'" class="nav flex-column gap-1 font-sans">
+      <div v-if="activeRole === 'user'" class="nav flex-column gap-1 font-sans">
         <div class="px-3 text-uppercase text-xs fw-bold text-muted mb-1">नागरिक पोर्टल (Citizen)</div>
         <router-link to="/citizen/dashboard" class="nav-link rounded-2 text-dark py-2 px-3 d-flex align-items-center gap-2" active-class="bg-success text-white fw-bold shadow-sm">
           <i class="bi bi-speedometer2 fs-5"></i> डॅशबोर्ड (Overview)
@@ -133,7 +133,7 @@
       </div>
 
       <!-- Super Admin Links -->
-      <div v-else-if="activeRole === 'superadmin'" class="nav flex-column gap-1 font-sans">
+      <div v-else-if="activeRole === 'super_admin'" class="nav flex-column gap-1 font-sans">
         <div class="px-3 text-uppercase text-xs fw-bold text-muted mb-1">SaaS Owner Super Admin</div>
         <router-link to="/superadmin/dashboard" class="nav-link rounded-2 text-dark py-2 px-3 d-flex align-items-center gap-2" active-class="bg-success text-white fw-bold shadow-sm">
           <i class="bi bi-speedometer2 fs-5"></i> डॅशबोर्ड (Dashboard)
@@ -183,7 +183,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useAuth } from '../../composables/useAuth';
-
+// console.log('useAuth:', useAuth());
 defineProps<{
   collapsed?: boolean;
 }>();
@@ -192,10 +192,10 @@ const { user, activeRole } = useAuth();
 
 const userRoleBadge = computed(() => {
   switch (activeRole.value) {
-    case 'citizen': return 'नागरिक';
+    case 'user': return 'नागरिक';
     case 'staff': return 'ग्रामपंचायत कर्मचारी';
     case 'admin': return 'सरपंच / Gram Sevak';
-    case 'superadmin': return 'SaaS Owner';
+    case 'super_admin': return 'SaaS Owner';
     default: return 'पाहुणे';
   }
 });

@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
-
-export type UserRole = 'public' | 'citizen' | 'staff' | 'admin' | 'superadmin';
-
+import { logout as logoutApi } from '@/services/authService';
+// export type UserRole = 'public' | 'citizen' | 'staff' | 'admin' | 'superadmin';
+export type UserRole = 'public' | 'user' | 'staff' | 'admin' | 'super_admin';
 export interface UserProfile {
   id: string;
   name: string;
@@ -15,7 +15,11 @@ export interface UserProfile {
   citizenAadhaar?: string;
 }
 
-const currentRole = ref<UserRole>('public');
+// const currentRole = ref<UserRole>('public');
+const currentRole = ref<UserRole>(
+  (localStorage.getItem('role') as UserRole) || 'user'
+);
+// console.log('currentRole:==================', currentRole.value);
 export interface PanchayatTenant {
   id: string;
   nameMr: string;
@@ -94,12 +98,12 @@ const mockUsers: Record<UserRole, UserProfile> = {
     panchayatName: 'शिवणे ग्रामपंचायत',
     district: 'पुणे'
   },
-  citizen: {
+  user: {
     id: 'cit-101',
     name: 'संजय बबनराव देशमुख',
     email: 'sanjay.deshmukh@gmail.com',
     phone: '9822123456',
-    role: 'citizen',
+    role: 'user',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
     panchayatName: 'शिवणे ग्रामपंचायत',
     district: 'पुणे',
@@ -127,12 +131,12 @@ const mockUsers: Record<UserRole, UserProfile> = {
     district: 'पुणे',
     designation: 'सरपंच (Sarpanch)'
   },
-  superadmin: {
+  super_admin: {
     id: 'sup-999',
     name: 'डॉ. विजय कदम (SaaS Platform Owner)',
     email: 'superadmin@egrampanchayat.in',
     phone: '9823000000',
-    role: 'superadmin',
+    role: 'super_admin',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
     panchayatName: 'सर्व ग्रामपंचायती (Maharashtra State)',
     district: 'महाराष्ट्र राज्य',
@@ -141,9 +145,23 @@ const mockUsers: Record<UserRole, UserProfile> = {
 };
 
 export function useAuth() {
-  const user = computed(() => mockUsers[currentRole.value]);
-  const activeRole = computed(() => currentRole.value);
+  const user = computed(() => {
+    const stored = localStorage.getItem('user');
+    return stored ? JSON.parse(stored) : null;
+  });
+
+  const roles = computed(() => {
+    const stored = localStorage.getItem('roles');
+    return stored ? JSON.parse(stored) : [];
+  });
+  // const activeRole = computed(() => currentRole.value);
+  const activeRole = computed(() => {
+    return roles.value.length > 0 ? roles.value[0] : 'public';
+  });
   const activePanchayat = computed(() => selectedPanchayat.value);
+
+  const token = computed(() => localStorage.getItem('token'));
+  const isAuthenticated = computed(() => !!token.value);
 
   function switchRole(newRole: UserRole) {
     currentRole.value = newRole;
@@ -159,15 +177,33 @@ export function useAuth() {
       selectedPanchayat.value = found;
     }
   }
-
+  //   function logout() {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
+  //   localStorage.removeItem('roles');
+  // }
+ async function logout() {
+    try {
+      await logoutApi();
+    } catch (error) {
+      console.error('Logout API failed:', error);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('roles');
+    }
+  }
   return {
     user,
+    roles,
     activeRole,
     activePanchayat,
     availablePanchayats,
+    isAuthenticated,
+    mockUsers,
     switchRole,
     setPanchayat,
     setPanchayatById,
-    mockUsers
+    logout, 
   };
 }

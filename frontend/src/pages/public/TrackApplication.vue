@@ -67,7 +67,7 @@
         <Timeline :steps="appTimelineSteps" />
 
         <div v-if="foundApp.downloadUrl" class="mt-4 pt-3 border-top text-center">
-          <button class="btn btn-eg-gold rounded-pill px-4 fw-bold">
+          <button class="btn btn-eg-primary rounded-pill px-4 fw-bold">
             <i class="bi bi-file-earmark-pdf-fill me-1"></i> डिजिटल सहीचा दाखला डाऊनलोड करा (PDF)
           </button>
         </div>

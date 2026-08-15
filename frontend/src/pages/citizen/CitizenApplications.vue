@@ -67,7 +67,7 @@
                 </button>
                 <button 
                   v-if="app.status === 'Certificate Generated'" 
-                  class="btn btn-sm btn-eg-gold rounded-pill text-xs font-sans px-2.5 py-1"
+                  class="btn btn-sm btn-eg-primary rounded-pill text-xs font-sans px-2.5 py-1"
                   @click="downloadCertificate(app)"
                 >
                   <i class="bi bi-download me-1"></i> दाखला PDF
@@ -158,7 +158,7 @@
             <div v-if="selectedApp.status === 'Certificate Generated'" class="p-3 bg-success bg-opacity-10 border border-success rounded-3 text-center">
               <i class="bi bi-award-fill fs-2 text-success d-block mb-1"></i>
               <strong class="text-sm text-success d-block mb-2">तुमचा अधिकृत दाखला तयार आहे!</strong>
-              <button class="btn btn-eg-gold rounded-pill px-4 fw-bold font-sans btn-sm" @click="downloadCertificate(selectedApp)">
+              <button class="btn btn-eg-primary rounded-pill px-4 fw-bold font-sans btn-sm" @click="downloadCertificate(selectedApp)">
                 <i class="bi bi-download me-1"></i> अधिकृत डिजिटल दाखला PDF डाऊनलोड करा
               </button>
             </div>

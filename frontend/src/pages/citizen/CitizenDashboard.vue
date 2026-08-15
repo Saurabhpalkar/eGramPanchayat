@@ -20,16 +20,22 @@
     <!-- Quick Stats Grid -->
     <div class="row g-3 mb-4">
       <div class="col-6 col-md-3">
-        <StatsCard icon="bi-file-earmark-check" label="माझे एकूण अर्ज" :value="myAppsCount" variant="green" />
+        <StatsCard icon="bi-file-earmark-check" label="माझे एकूण अर्ज" :value="stats.total_applications" variant="green" />
       </div>
       <div class="col-6 col-md-3">
-        <StatsCard icon="bi-award" label="मंजूर दाखले" :value="myApprovedCount" variant="gold" />
+        <StatsCard icon="bi-award" label="मंजूर दाखले" :value="stats.approved_applications" variant="gold" />
       </div>
-      <div class="col-6 col-md-3">
+      <!-- <div class="col-6 col-md-3">
         <StatsCard icon="bi-exclamation-triangle" label="माझ्या तक्रारी" :value="myComplaintsCount" variant="blue" />
-      </div>
+      </div> -->
       <div class="col-6 col-md-3">
+        <StatsCard icon="bi-exclamation-triangle" label="प्रलंबित अर्ज" :value="stats.pending_applications" variant="blue" />
+      </div>
+      <!-- <div class="col-6 col-md-3">
         <StatsCard icon="bi-bell" label="नवीन सूचना" value="2" variant="red" />
+      </div> -->
+     <div class="col-6 col-md-3">
+        <StatsCard icon="bi-bell" label="नामंजूर अर्ज"  variant="red" :value="stats.rejected_applications"/>
       </div>
     </div>
 
@@ -52,38 +58,71 @@
           </tr>
         </template>
         <template #body>
-          <tr v-for="app in myApplications" :key="app.id">
-            <td><strong class="text-dark">{{ app.applicationNo }}</strong></td>
-            <td>{{ app.serviceNameMr }}</td>
-            <td>{{ app.appliedDate }}</td>
-            <td><span class="text-warning">{{ app.dueDate }}</span></td>
-            <td><StatusBadge :status="app.status" :text="app.statusMr" /></td>
+          <tr v-for="app in recentApplications" :key="app.id">
+            <td><strong class="text-dark">{{ app.application_no }}</strong></td>
+            <td>{{ app.service?.name_mr || '-' }}</td> 
+            <td>{{ app.applied_date }}</td>
+            <td><span class="text-warning">{{ app.due_date }}</span></td>
+            <td><StatusBadge :status="app.status" :text="app.status" /></td>
             <td>
-              <router-link :to="{ path: '/track', query: { id: app.applicationNo } }" class="btn btn-sm btn-outline-success rounded-pill px-2.5 py-0.5 text-xs">
+              <router-link :to="{ path: '/track', query: { id: app.application_no } }" class="btn btn-sm btn-outline-success rounded-pill px-2.5 py-0.5 text-xs">
                 ट्रॅक करा
               </router-link>
             </td>
           </tr>
         </template>
       </ResponsiveTable>
-    </div>
+    </div> 
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import {ref, computed, onMounted } from 'vue';
 import { useAuth } from '../../composables/useAuth';
-import { useMockData } from '../../composables/useMockData';
+// import { useMockData } from '../../composables/useMockData';
 import DashboardHeader from '../../components/common/DashboardHeader.vue';
 import StatsCard from '../../components/common/StatsCard.vue';
 import StatusBadge from '../../components/common/StatusBadge.vue';
 import ResponsiveTable from '../../components/common/ResponsiveTable.vue';
+import {getCitizenDashboard} from '../../services/citizenService';
+// const { user } = useAuth();
+// const { citizenApplications, complaints } = useMockData();
 
-const { user } = useAuth();
-const { citizenApplications, complaints } = useMockData();
+// const myApplications = computed(() => citizenApplications.value);
+// const myAppsCount = computed(() => myApplications.value.length);
+// const myApprovedCount = computed(() => myApplications.value.filter(a => a.status === 'Certificate Generated').length);
+// const myComplaintsCount = computed(() => complaints.value.length);
 
-const myApplications = computed(() => citizenApplications.value);
-const myAppsCount = computed(() => myApplications.value.length);
-const myApprovedCount = computed(() => myApplications.value.filter(a => a.status === 'Certificate Generated').length);
-const myComplaintsCount = computed(() => complaints.value.length);
+const user = ref({
+  name : '',
+  mobile : '',
+  aadhaar_number : '',
+  ward_id : '',
+  grampanchayat_id : '',
+  citizenAadhaar : '',            
+  panchayatName : '',
+});
+const recentApplications = ref([]);
+const stats = ref({
+  total_applications: 0,
+  approved_applications: 0,
+  pending_applications: 0,
+  rejected_applications: 0,
+})
+  onMounted (async () => {
+
+    try {
+      console.log(localStorage.getItem('user'));
+      const response = await getCitizenDashboard();
+      // console.log('Citizen dashboard data fetched successfully:', response.user);
+      user.value = response.user;
+      stats.value = response.stats;
+      recentApplications.value = response.recent_applications;
+
+      // console.log('Citizen dashboard data fetched successfully:', user.value);
+    } catch (error) { 
+      // console.error('Error fetching citizen dashboard data:', error);
+    } 
+  })
+
 </script>

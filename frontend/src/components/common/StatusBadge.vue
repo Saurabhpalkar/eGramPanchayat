@@ -18,7 +18,7 @@ const badgeClasses = computed(() => {
     return 'bg-success bg-opacity-10 text-success border-success border-opacity-25';
   }
   if (s.includes('process') || s.includes('progress') || s.includes('assigned')) {
-    return 'bg-warning bg-opacity-15 text-dark border-warning border-opacity-50';
+    return 'bg-warning bg-opacity-10 text-success border-warning border-opacity-50';
   }
   if (s.includes('pending') || s.includes('verification') || s.includes('received')) {
     return 'bg-info bg-opacity-10 text-info border-info border-opacity-25';
