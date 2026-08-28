@@ -17,7 +17,7 @@ export async function sendOtp(data) {
 
 export async function login(credentials) {
   const response = await api.post('/auth/login', credentials);
-
+  
   const data = response.data.data;
 
   localStorage.setItem('token', data.token);

@@ -112,7 +112,7 @@ const stats = ref({
   onMounted (async () => {
 
     try {
-      console.log(localStorage.getItem('user'));
+      // console.log(localStorage.getItem('user'));
       const response = await getCitizenDashboard();
       // console.log('Citizen dashboard data fetched successfully:', response.user);
       user.value = response.user;

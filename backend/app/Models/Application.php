@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use App\Models\Service;
+use App\Models\ApplicationDocument;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Application extends Model
 {
@@ -20,12 +22,15 @@ class Application extends Model
         'due_date',
         'approved_date',
         'remarks',
-    ];
+    ];      
 
     public function user(){
         return $this->belongsTo(User::class);
     }
     public function service(){
         return $this->belongsTo(Service::class);
+    }
+    public function documents(){
+        return $this->hasMany(ApplicationDocument::class);
     }
 }

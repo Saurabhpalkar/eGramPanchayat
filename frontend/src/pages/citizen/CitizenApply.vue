@@ -6,25 +6,32 @@
     <div class="eg-card p-3 my-3">
       <div class="d-flex justify-content-between align-items-center position-relative font-sans text-xs">
         <div class="d-flex align-items-center gap-2 z-1" :class="step >= 1 ? 'text-success fw-bold' : 'text-muted'">
-          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center" :class="step >= 1 ? 'bg-success text-white' : 'bg-light text-muted border'">1</span>
+          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center"
+            :class="step >= 1 ? 'bg-success text-white' : 'bg-light text-muted border'">1</span>
           <span class="d-none d-sm-inline">सेवा निवडा</span>
         </div>
-        <div class="flex-grow-1 mx-2 border-top" :class="step >= 2 ? 'border-success border-2' : 'border-secondary opacity-25'"></div>
+        <div class="flex-grow-1 mx-2 border-top"
+          :class="step >= 2 ? 'border-success border-2' : 'border-secondary opacity-25'"></div>
 
         <div class="d-flex align-items-center gap-2 z-1" :class="step >= 2 ? 'text-success fw-bold' : 'text-muted'">
-          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center" :class="step >= 2 ? 'bg-success text-white' : 'bg-light text-muted border'">2</span>
+          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center"
+            :class="step >= 2 ? 'bg-success text-white' : 'bg-light text-muted border'">2</span>
           <span class="d-none d-sm-inline">नागरिक माहिती</span>
         </div>
-        <div class="flex-grow-1 mx-2 border-top" :class="step >= 3 ? 'border-success border-2' : 'border-secondary opacity-25'"></div>
+        <div class="flex-grow-1 mx-2 border-top"
+          :class="step >= 3 ? 'border-success border-2' : 'border-secondary opacity-25'"></div>
 
         <div class="d-flex align-items-center gap-2 z-1" :class="step >= 3 ? 'text-success fw-bold' : 'text-muted'">
-          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center" :class="step >= 3 ? 'bg-success text-white' : 'bg-light text-muted border'">3</span>
+          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center"
+            :class="step >= 3 ? 'bg-success text-white' : 'bg-light text-muted border'">3</span>
           <span class="d-none d-sm-inline">कागदपत्रे (Upload)</span>
         </div>
-        <div class="flex-grow-1 mx-2 border-top" :class="step >= 4 ? 'border-success border-2' : 'border-secondary opacity-25'"></div>
+        <div class="flex-grow-1 mx-2 border-top"
+          :class="step >= 4 ? 'border-success border-2' : 'border-secondary opacity-25'"></div>
 
         <div class="d-flex align-items-center gap-2 z-1" :class="step >= 4 ? 'text-success fw-bold' : 'text-muted'">
-          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center" :class="step >= 4 ? 'bg-success text-white' : 'bg-light text-muted border'">4</span>
+          <span class="badge rounded-circle p-2 d-inline-flex align-items-center justify-content-center"
+            :class="step >= 4 ? 'bg-success text-white' : 'bg-light text-muted border'">4</span>
           <span class="d-none d-sm-inline">शुल्क भरणा व सबमिट</span>
         </div>
       </div>
@@ -43,11 +50,10 @@
 
       <div class="row g-3">
         <div v-for="srv in filteredServices" :key="srv.id" class="col-sm-6 col-lg-3">
-          <div 
+          <div
             class="eg-card h-100 p-3 d-flex flex-column justify-content-between border transition-all cursor-pointer hover-shadow"
             :class="selectedService?.id === srv.id ? 'border-2 border-success bg-success bg-opacity-10 shadow-sm' : ''"
-            @click="selectService(srv)"
-          >
+            @click="selectService(srv)">
             <div>
               <div class="d-flex align-items-center justify-content-between mb-2">
                 <div class="bg-success bg-opacity-10 text-success p-2 rounded-circle">
@@ -55,12 +61,13 @@
                 </div>
                 <span class="badge bg-light text-dark border font-sans text-xs">₹{{ srv.fee }} शुल्क</span>
               </div>
-              <h6 class="fw-bold text-dark mb-1" style="font-family: var(--font-marathi);">{{ srv.nameMr }}</h6>
-              <p class="text-xs text-muted font-sans mb-3">{{ srv.descriptionMr || 'ऑनलाईन अर्जासाठी पात्र' }}</p>
+              <h6 class="fw-bold text-dark mb-1" style="font-family: var(--font-marathi);">{{ srv.name_mr }}</h6>
+              <p class="text-xs text-muted font-sans mb-3">{{ srv.description || '-' }}</p>
             </div>
 
-            <div class="pt-2 border-top d-flex justify-content-between align-items-center text-xs font-sans text-success fw-bold">
-              <span>SLA: {{ srv.slaDays }} दिवस</span>
+            <div
+              class="pt-2 border-top d-flex justify-content-between align-items-center text-xs font-sans text-success fw-bold">
+              <span>SLA: {{ srv.processing_days }} दिवस</span>
               <button class="btn btn-sm btn-success rounded-pill px-3 py-1">
                 निवडा <i class="bi bi-arrow-right"></i>
               </button>
@@ -79,19 +86,25 @@
         <h5 class="fw-bold text-dark mb-0">अर्जादाराची वैयक्तिक माहिती (Applicant Details)</h5>
       </div>
 
-      <form @submit.prevent="step = 3">
+      <form @submit.prevent="step = 4">
         <div class="row g-3">
           <div class="col-md-6">
-            <label class="form-label text-xs fw-bold text-dark">पूर्ण नाव (मराठीत) <span class="text-danger">*</span></label>
-            <input type="text" v-model="formData.applicantName" class="form-control text-xs" placeholder="उदा. रमेश मारुती पाटील" required />
+            <label class="form-label text-xs fw-bold text-dark">पूर्ण नाव (मराठीत) <span
+                class="text-danger">*</span></label>
+            <input type="text" v-model="formData.applicantName" class="form-control text-xs"
+              placeholder="उदा. रमेश मारुती पाटील" required />
           </div>
           <div class="col-md-6">
-            <label class="form-label text-xs fw-bold text-dark">आधार क्रमांक (Aadhaar No) <span class="text-danger">*</span></label>
-            <input type="text" v-model="formData.aadhaarNo" class="form-control text-xs" maxlength="12" placeholder="१२ अंकी आधार क्र." required />
+            <label class="form-label text-xs fw-bold text-dark">आधार क्रमांक (Aadhaar No) <span
+                class="text-danger">*</span></label>
+            <input type="text" v-model="formData.aadhaarNo" class="form-control text-xs" maxlength="12"
+              placeholder="१२ अंकी आधार क्र." required />
           </div>
           <div class="col-md-6">
-            <label class="form-label text-xs fw-bold text-dark">मोबाईल क्रमांक (OTP व SMS साठी) <span class="text-danger">*</span></label>
-            <input type="tel" v-model="formData.mobile" class="form-control text-xs" maxlength="10" placeholder="१० अंकी मोबाईल क्र." required />
+            <label class="form-label text-xs fw-bold text-dark">मोबाईल क्रमांक (OTP व SMS साठी) <span
+                class="text-danger">*</span></label>
+            <input type="tel" v-model="formData.mobile" class="form-control text-xs" maxlength="10"
+              placeholder="१० अंकी मोबाईल क्र." required />
           </div>
           <div class="col-md-6">
             <label class="form-label text-xs fw-bold text-dark">ईमेल (पर्यायी)</label>
@@ -105,7 +118,8 @@
           </div>
           <div class="col-md-8">
             <label class="form-label text-xs fw-bold text-dark">रहवासी पत्ता <span class="text-danger">*</span></label>
-            <input type="text" v-model="formData.address" class="form-control text-xs" placeholder="गल्ली क्र. / घर क्र. / शिवारे" required />
+            <input type="text" v-model="formData.address" class="form-control text-xs"
+              placeholder="गल्ली क्र. / घर क्र. / शिवारे" required />
           </div>
         </div>
 
@@ -113,7 +127,7 @@
           <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-4" @click="step = 1">
             <i class="bi bi-arrow-left me-1"></i> मागे जा
           </button>
-          <button type="submit" class="btn btn-success btn-sm rounded-pill px-4 fw-bold">
+          <button type="submit" class="btn btn-success btn-sm rounded-pill px-4 fw-bold" @click="goToDocuments" >
             पुढे जा (कागदपत्रे) <i class="bi bi-arrow-right ms-1"></i>
           </button>
         </div>
@@ -123,26 +137,37 @@
     <!-- STEP 3: Document Uploads -->
     <div v-else-if="step === 3" class="eg-card p-4 my-3 font-sans">
       <div class="border-bottom pb-3 mb-3">
-        <h5 class="fw-bold text-dark mb-0"><i class="bi bi-cloud-arrow-up text-success me-2"></i>आवश्यक कागदपत्रे अपलोड करा (Upload Documents)</h5>
+        <h5 class="fw-bold text-dark mb-0"><i class="bi bi-cloud-arrow-up text-success me-2"></i>आवश्यक कागदपत्रे अपलोड
+          करा (Upload Documents)</h5>
         <small class="text-muted">स्वीकृत फॉरमॅट: JPG, PNG, PDF (जास्तीत जास्त आकार २ MB)</small>
+        <div v-if="documentError" class="alert alert-danger py-2 px-3 mt-3 mb-0 text-xs">
+          <i class="bi bi-exclamation-triangle me-1"></i>
+          {{ documentError }}
+        </div>
       </div>
 
       <div class="row g-3">
         <div class="col-md-6">
           <div class="border border-dashed p-3 rounded text-center bg-light">
             <i class="bi bi-card-image fs-2 text-success d-block mb-1"></i>
-            <strong class="text-xs text-dark d-block mb-1">१. आधार कार्ड / ओळखपत्र <span class="text-danger">*</span></strong>
-            <input type="file" ref="fileAadhaar" class="form-control form-control-sm text-xs mt-2" @change="onFileSelected('aadhaar', $event)" />
-            <small v-if="files.aadhaar" class="text-success fw-bold d-block mt-1">✓ {{ files.aadhaar.name }} अपलोड झाले</small>
+            <strong class="text-xs text-dark d-block mb-1">१. आधार कार्ड / ओळखपत्र <span
+                class="text-danger">*</span></strong>
+            <input type="file" ref="fileAadhaar" class="form-control form-control-sm text-xs mt-2"
+              @change="onFileSelected('aadhaar', $event)" />
+            <small v-if="files.aadhaar" class="text-success fw-bold d-block mt-1">✓ {{ files.aadhaar.name }} अपलोड
+              झाले</small>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="border border-dashed p-3 rounded text-center bg-light">
             <i class="bi bi-house-door fs-2 text-success d-block mb-1"></i>
-            <strong class="text-xs text-dark d-block mb-1">२. रेशन कार्ड / वीज बिल (रहिवास पुरावा) <span class="text-danger">*</span></strong>
-            <input type="file" ref="fileResidence" class="form-control form-control-sm text-xs mt-2" @change="onFileSelected('residence', $event)" />
-            <small v-if="files.residence" class="text-success fw-bold d-block mt-1">✓ {{ files.residence.name }} अपलोड झाले</small>
+            <strong class="text-xs text-dark d-block mb-1">२. रेशन कार्ड / वीज बिल (रहिवास पुरावा) <span
+                class="text-danger">*</span></strong>
+            <input type="file" ref="fileResidence" class="form-control form-control-sm text-xs mt-2"
+              @change="onFileSelected('residence', $event)" />
+            <small v-if="files.residence" class="text-success fw-bold d-block mt-1">✓ {{ files.residence.name }} अपलोड
+              झाले</small>
           </div>
         </div>
 
@@ -150,8 +175,10 @@
           <div class="border border-dashed p-3 rounded text-center bg-light">
             <i class="bi bi-file-earmark-text fs-2 text-success d-block mb-1"></i>
             <strong class="text-xs text-dark d-block mb-1">३. स्वयंघोषणा पत्र (Self Declaration)</strong>
-            <input type="file" ref="fileSelf" class="form-control form-control-sm text-xs mt-2" @change="onFileSelected('self', $event)" />
-            <small v-if="files.self" class="text-success fw-bold d-block mt-1">✓ {{ files.self.name }} अपलोड झाले</small>
+            <input type="file" ref="fileSelf" class="form-control form-control-sm text-xs mt-2"
+              @change="onFileSelected('self', $event)" />
+            <small v-if="files.self" class="text-success fw-bold d-block mt-1">✓ {{ files.self.name }} अपलोड
+              झाले</small>
           </div>
         </div>
 
@@ -159,7 +186,8 @@
           <div class="border border-dashed p-3 rounded text-center bg-light">
             <i class="bi bi-receipt fs-2 text-success d-block mb-1"></i>
             <strong class="text-xs text-dark d-block mb-1">४. घरपट्टी / पाणीपट्टी पावती (जर लागू असेल)</strong>
-            <input type="file" ref="fileTax" class="form-control form-control-sm text-xs mt-2" @change="onFileSelected('tax', $event)" />
+            <input type="file" ref="fileTax" class="form-control form-control-sm text-xs mt-2"
+              @change="onFileSelected('tax', $event)" />
             <small v-if="files.tax" class="text-success fw-bold d-block mt-1">✓ {{ files.tax.name }} अपलोड झाले</small>
           </div>
         </div>
@@ -178,7 +206,8 @@
     <!-- STEP 4: Review & Payment -->
     <div v-else-if="step === 4" class="eg-card p-4 my-3 font-sans">
       <div class="border-bottom pb-3 mb-3">
-        <h5 class="fw-bold text-dark mb-0"><i class="bi bi-check2-square text-success me-2"></i>अर्जाचे पुनरावलोकन व ऑनलाईन शुल्क भरणा</h5>
+        <h5 class="fw-bold text-dark mb-0"><i class="bi bi-check2-square text-success me-2"></i>अर्जाचे पुनरावलोकन व
+          ऑनलाईन शुल्क भरणा</h5>
       </div>
 
       <div class="row g-3">
@@ -186,7 +215,7 @@
           <div class="bg-light p-3 rounded border text-xs d-flex flex-column gap-2 mb-3">
             <div class="d-flex justify-content-between">
               <span class="text-muted">निवडलेला दाखला:</span>
-              <strong class="text-dark">{{ selectedService?.nameMr }}</strong>
+              <strong class="text-dark">{{ selectedService?.name_mr }}</strong>
             </div>
             <div class="d-flex justify-content-between">
               <span class="text-muted">अर्जादाराचे नाव:</span>
@@ -253,7 +282,8 @@
               <span class="text-success fs-5">₹{{ (selectedService?.fee || 30) + 10 }}</span>
             </div>
 
-            <button class="btn btn-success w-100 rounded-pill py-2 font-sans fw-bold shadow-sm" @click="submitFinalApplication">
+            <button class="btn btn-success w-100 rounded-pill py-2 font-sans fw-bold shadow-sm"
+              @click="submitFinalApplication">
               <i class="bi bi-shield-check me-1"></i> ऑनलाईन अर्ज व शुल्क जमा करा
             </button>
           </div>
@@ -268,7 +298,8 @@
           <div class="mb-3 text-success">
             <i class="bi bi-check-circle-fill text-success" style="font-size: 3.5rem;"></i>
           </div>
-          <h4 class="fw-bold text-success mb-1" style="font-family: var(--font-marathi);">अर्ज यशस्वीरीत्या सादर झाला!</h4>
+          <h4 class="fw-bold text-success mb-1" style="font-family: var(--font-marathi);">अर्ज यशस्वीरीत्या सादर झाला!
+          </h4>
           <p class="text-xs text-muted font-sans mb-3">आपला अर्ज ग्रामपंचायत दाखला कक्षाकडे जमा झाला आहे.</p>
 
           <div class="bg-light p-3 rounded-3 border text-start text-xs font-sans mb-3">
@@ -301,32 +332,48 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMockData } from '../../composables/useMockData';
 import { useAuth } from '../../composables/useAuth';
 import DashboardHeader from '../../components/common/DashboardHeader.vue';
+import { getCitizenServices, submitCitizenApplication } from '@/services/citizenService.js';
 
 const route = useRoute();
 const router = useRouter();
-const { services, submitServiceApplication } = useMockData();
+// const { services, submitServiceApplication } = useMockData();
 const { user } = useAuth();
 
 const step = ref(1);
 const serviceSearch = ref('');
+const documentError = ref('');
 const selectedService = ref<any>(null);
 const paymentMethod = ref('UPI');
 const submittedApp = ref<any>(null);
-
+const services = ref<any[]>([]);
+const submitError = ref('');
+const submitting = ref(false)
 const formData = reactive({
-  applicantName: user.value.name || 'रामचंद्र पाटील',
-  aadhaarNo: user.value.citizenAadhaar || '789012345678',
-  mobile: user.value.mobile || '9822334455',
-  email: 'citizen@panchayat.gov.in',
-  wardNo: 3,
-  address: 'वार्ड क्र. ३, मुख्य रस्ता'
+  applicantName: '',
+  aadhaarNo: '',
+  mobile: '',
+  email: '',
+  wardNo: '',
+  address: ''
 });
-
+watch(
+  user,
+  (newUser) => {
+    if (!newUser) return;
+    // console.log(newUser)
+    formData.applicantName = newUser.name_mr || newUser.name || '';
+    formData.aadhaarNo = newUser.aadhaar_number || '';
+    formData.mobile = newUser.mobile || '';
+    formData.email = newUser.email || '';
+    formData.wardNo = newUser.ward_id || '';
+  },
+  { immediate: true }
+);
 const files = reactive<Record<string, File | null>>({
   aadhaar: null,
   residence: null,
@@ -334,48 +381,217 @@ const files = reactive<Record<string, File | null>>({
   tax: null
 });
 
-const filteredServices = computed(() => {
-  return services.value.filter(s => 
-    !serviceSearch.value || s.nameMr.toLowerCase().includes(serviceSearch.value.toLowerCase())
-  );
-});
+// const filteredServices = computed(() => {
+//   return services.value.filter(s => 
+//     !serviceSearch.value || s.nameMr.toLowerCase().includes(serviceSearch.value.toLowerCase())
+//   );
+// });
+function goToDocuments() {
+  step.value = 3;
+}
 
 function selectService(srv: any) {
   selectedService.value = srv;
+  // console.log(selectedService)
   step.value = 2;
+  console.log(step.value)
 }
 
 function onFileSelected(key: string, e: Event) {
   const target = e.target as HTMLInputElement;
-  if (target.files && target.files[0]) {
-    files[key] = target.files[0];
+  const file = target.files?.[0];
+
+  if (!file) {
+    return;
   }
+
+  documentError.value = '';
+
+  // Maximum 2 MB
+  const maxSize = 2 * 1024 * 1024;
+
+  if (file.size > maxSize) {
+    documentError.value = `${file.name} हा फाईल 2 MB पेक्षा मोठा आहे.`;
+
+    target.value = '';
+    files[key] = null;
+
+    return;
+  }
+
+  // Allowed file types
+  const allowedTypes = [
+    'image/jpeg',
+    'image/png',
+    'application/pdf'
+  ];
+
+  if (!allowedTypes.includes(file.type)) {
+    documentError.value =
+      `${file.name} हा फॉरमॅट स्वीकारला जात नाही. फक्त JPG, PNG किंवा PDF फाईल निवडा.`;
+
+    target.value = '';
+    files[key] = null;
+
+    return;
+  }
+
+  files[key] = file;
 }
+const filteredServices = computed(() => {
+  const search = serviceSearch.value.trim().toLowerCase();
 
-function submitFinalApplication() {
-  if (!selectedService.value) return;
-
-  const app = submitServiceApplication(
-    selectedService.value.id,
-    formData.applicantName,
-    formData.mobile,
-    formData.aadhaarNo
+  return services.value.filter(service =>
+    service.name_mr?.toLowerCase().includes(search)
   );
+});
+// console.log(filteredServices)
+async function submitFinalApplication() {
+  // Clear previous error
+  submitError.value = '';
 
-  submittedApp.value = app;
+  // 1. Check service
+  if (!selectedService.value) {
+    submitError.value = 'कृपया सेवा निवडा.';
+    step.value = 1;
+    return;
+  }
+
+  // 2. Validate documents again
+  // Important: never rely only on Step 3 validation.
+  // if (!validateDocuments()) {
+  //   step.value = 3;
+  //   return;
+  // }
+
+  // 3. Prevent duplicate submission
+  if (submitting.value) {
+    return;
+  }
+
+  submitting.value = true;
+
+  try {
+    // 4. Create multipart/form-data
+    const data = new FormData();
+
+    // Application details
+    data.append(
+      'service_id',
+      String(selectedService.value.id)
+    );
+
+    data.append(
+      'applicant_name',
+      formData.applicantName
+    );
+
+    data.append(
+      'aadhaar_no',
+      formData.aadhaarNo
+    );
+
+    data.append(
+      'mobile',
+      formData.mobile
+    );
+
+    data.append(
+      'email',
+      formData.email || ''
+    );
+
+    data.append(
+      'ward_no',
+      String(formData.wardNo)
+    );
+
+    data.append(
+      'address',
+      formData.address
+    );
+
+    // Payment method
+    data.append(
+      'payment_method',
+      paymentMethod.value
+    );
+
+    // Documents
+    if (files.aadhaar) {
+      data.append('aadhaar', files.aadhaar);
+    }
+
+    if (files.residence) {
+      data.append('residence', files.residence);
+    }
+
+    if (files.self) {
+      data.append('self', files.self);
+    }
+
+    if (files.tax) {
+      data.append('tax', files.tax);
+    }
+
+    // Debug - temporary
+    // for (const [key, value] of data.entries()) {
+    //   console.log(key, value);
+    // }
+
+    // 5. Send to Laravel
+    const response = await submitCitizenApplication(data);
+    const application = response.data.application;
+
+        submittedApp.value = {
+      applicationNo: application.application_no,
+      serviceId: application.service_id,
+      status: application.status,
+      dueDate: application.due_date,
+      documents: application.documents
+    };
+    // console.log('Application submitted:', response);
+
+    // 6. Save returned application information
+    submittedApp.value = response.application;
+
+  } catch (error: any) {
+    console.error('Application submission error:', error);
+
+    if (error.response?.status === 422) {
+      submitError.value =
+        error.response.data?.message ||
+        'कृपया दिलेली माहिती तपासा.';
+    } else {
+      submitError.value =
+        error.response?.data?.message ||
+        'अर्ज सादर करताना काहीतरी समस्या आली. कृपया पुन्हा प्रयत्न करा.';
+    }
+
+  } finally {
+    // 7. Enable button again
+    submitting.value = false;
+  }
 }
 
 function downloadReceipt() {
   alert(`अर्ज क्रमांक ${submittedApp.value?.applicationNo} ची अधिकृत पावती डाऊनलोड झाली.`);
 }
-
+async function loadServices() {
+  const response = await getCitizenServices();
+  // console.log(response)
+  services.value = response.services
+  // console.log(selectedService.value);
+}
 onMounted(() => {
-  if (route.query.applyId) {
-    const srv = services.value.find(s => s.id === route.query.applyId);
-    if (srv) {
-      selectedService.value = srv;
-      step.value = 2;
-    }
-  }
+  loadServices();
+  console.log(step.value)
+  // if (route.query.applyId) {
+  //   const srv = services.value.find(s => s.id === route.query.applyId);
+  //   if (srv) {
+  //     selectedService.value = srv;
+  //     step.value = 2;
+  //   }
+  // }
 });
 </script>

@@ -24,7 +24,7 @@ class CitizenDashboardController extends Controller
             'message' => 'Citizen dashboard data retrieved successfully.',
             'user' => $user,
             'stats' => $stats,
-           'recent_applications' => ApplicationResource::collection($recentApplications),
+            'recent_applications' => ApplicationResource::collection($recentApplications),
             ]);
     }
 }

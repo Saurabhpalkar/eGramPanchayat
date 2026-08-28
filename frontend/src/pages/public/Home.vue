@@ -7,7 +7,7 @@
           <!-- Left Column Content -->
           <div class="col-lg-7 text-start">
             <!-- Village Badge -->
-            <div class="d-inline-flex align-items-center gap-2 bg-black bg-opacity-40 backdrop-blur rounded-pill px-3.5 py-1.5 mb-3 text-warning fw-semibold text-xs border border-white border-opacity-30 shadow-sm">
+            <div class="d-inline-flex align-items-center gap-2  bg-opacity-40 backdrop-blur rounded-pill p-2 mb-3 text-warning fw-semibold text-xs border border-white border-opacity-30 shadow-sm">
               <i class="bi bi-geo-alt-fill text-warning"></i> {{ activePanchayat.nameMr }} (ता. {{ activePanchayat.taluka }}, जि. {{ activePanchayat.district }})
             </div>
 

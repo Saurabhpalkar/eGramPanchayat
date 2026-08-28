@@ -7,34 +7,48 @@
       <div class="btn-group font-sans">
         <button 
           class="btn btn-sm" 
-          :class="activeFilter === 'ALL' ? 'btn-success fw-bold' : 'btn-outline-secondary'"
-          @click="activeFilter = 'ALL'"
+          :class="activeFilter === 'All' ? 'btn-success fw-bold' : 'btn-outline-secondary'"
+          @click="changeFilter('All')"
         >
-          सर्व अर्ज ({{ myApps.length }})
+          सर्व अर्ज ({{ counts.total }})
         </button>
         <button 
           class="btn btn-sm" 
           :class="activeFilter === 'Pending' ? 'btn-success fw-bold' : 'btn-outline-secondary'"
-          @click="activeFilter = 'Pending'"
+          @click="changeFilter('Pending')"
         >
-          प्रक्रियेत ({{ pendingCount }})
+          प्रक्रियेत ({{ counts.pending }}) 
+          <!-- //activeFilter -->
         </button>
         <button 
           class="btn btn-sm" 
-          :class="activeFilter === 'Generated' ? 'btn-success fw-bold' : 'btn-outline-secondary'"
-          @click="activeFilter = 'Generated'"
+          :class="activeFilter === 'Approved' ? 'btn-success fw-bold' : 'btn-outline-secondary'"
+          @click="changeFilter ('Approved')"
         >
-          मंजूर / दाखला तयार ({{ generatedCount }})
+          मंजूर / दाखला तयार ({{ counts.approved }}) 
+          <!-- //generatedCount -->
+        </button>
+        <button 
+          class="btn btn-sm" 
+          :class="activeFilter === 'Rejected' ? 'btn-success fw-bold' : 'btn-outline-danger'"
+          @click="changeFilter ('Rejected')">
+          नामंजूर ({{ counts.rejected }}) 
+          <!-- //generatedCount -->
         </button>
       </div>
 
       <div class="d-flex align-items-center gap-2">
         <div class="input-group input-group-sm" style="max-width: 220px;">
-          <input type="text" v-model="searchQuery" class="form-control" placeholder="अर्ज क्र. शोधा..." />
+          <input type="text" v-model="searchQuery" style=" border-radius: 5px 0px 0px 5px !important" class="form-control" @keyup.enter="searchApplications" placeholder="अर्ज क्र. शोधा..." />
+         <button class="btn btn-success" type="button" @click="searchApplications">
+          <i class="bi bi-search"></i>
+        </button>
         </div>
-        <router-link to="/citizen/apply" class="btn btn-eg-primary btn-sm rounded-pill font-sans fw-bold px-3">
+        <div class="input-group input-group-lg" style="max-width: 220px;">
+        <router-link to="/citizen/apply" class="btn btn-eg-primary btn-sm rounded-pill font-sans fw-medium px-3">
           <i class="bi bi-plus-lg me-1"></i> नवीन अर्ज
         </router-link>
+        </div>
       </div>
     </div>
 
@@ -53,13 +67,13 @@
           </tr>
         </template>
         <template #body>
-          <tr v-for="app in filteredApps" :key="app.id">
-            <td><strong class="text-dark">{{ app.applicationNo }}</strong></td>
-            <td>{{ app.serviceNameMr }}</td>
-            <td>{{ app.appliedDate }}</td>
-            <td><span class="text-warning font-sans text-xs fw-bold">{{ app.dueDate }}</span></td>
-            <td>₹{{ app.amount || 30 }}</td>
-            <td><StatusBadge :status="app.status" :text="app.statusMr" /></td>
+          <tr v-for="app in applications" :key="app.id">
+            <td><strong class="text-dark">{{ app.application_no || '-' }}</strong></td>
+            <td>{{ app.service?.name_mr || '-' }}</td>
+            <td>{{ app.applied_date || '-'}}</td>
+            <td><span class="text-warning font-sans text-xs fw-bold">{{ app.due_date || '-'}}</span></td>
+            <td>₹{{ app.service?.fee || '-'}}</td>
+            <td><StatusBadge :status="app.status" :text="app.status" /></td>
             <td>
               <div class="d-flex gap-1">
                 <button class="btn btn-sm btn-outline-success rounded-pill text-xs font-sans px-2.5 py-1" @click="viewDetails(app)">
@@ -77,11 +91,38 @@
           </tr>
         </template>
       </ResponsiveTable>
+      <div class="d-flex justify-content-between align-items-center mt-4">
+  <div>
+    एकूण {{ pagination.total }} अर्ज
+  </div>
 
-      <div v-if="filteredApps.length === 0" class="p-4 text-center text-muted font-sans">
+  <div class="d-flex align-items-center gap-2">
+    <button
+      class="btn btn-outline-secondary btn-sm"
+      :disabled="pagination.current_page === 1"
+      @click="changePage(pagination.current_page - 1)"
+    >
+      मागील
+    </button>
+
+    <span class="px-2">
+      {{ pagination.current_page }} / {{ pagination.last_page }}
+    </span>
+
+    <button
+      class="btn btn-outline-secondary btn-sm"
+      :disabled="pagination.current_page === pagination.last_page"
+      @click="changePage(pagination.current_page + 1)"
+    >
+      पुढील
+    </button>
+  </div>
+</div>
+
+      <!-- <div v-if="filteredApps.length === 0" class="p-4 text-center text-muted font-sans">
         <i class="bi bi-journal-x fs-1 d-block mb-2 text-secondary"></i>
         <h6>कोणतेही अर्ज सापडले नाहीत.</h6>
-      </div>
+      </div> -->
     </div>
 
     <!-- Application Details & Timeline Modal -->
@@ -98,18 +139,18 @@
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <div class="bg-light p-3 rounded border text-xs d-flex flex-column gap-1">
-                  <div><strong>अर्ज क्रमांक:</strong> {{ selectedApp.applicationNo }}</div>
-                  <div><strong>सेवा:</strong> {{ selectedApp.serviceNameMr }}</div>
-                  <div><strong>अर्जादार:</strong> {{ selectedApp.citizenName }}</div>
-                  <div><strong>आधार:</strong> {{ selectedApp.citizenAadhaar }}</div>
+                  <div><strong>अर्ज क्रमांक:</strong> {{ selectedApp.application_no }}</div>
+                  <div><strong>सेवा:</strong> {{ selectedApp.service.name_mr  }}</div>
+                  <div><strong>अर्जादार:</strong> {{ selectedApp.user.name }}</div>
+                  <div><strong>आधार:</strong> {{ selectedApp.user.aadhaar_number }}</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="bg-light p-3 rounded border text-xs d-flex flex-column gap-1">
-                  <div><strong>दाखल तारीख:</strong> {{ selectedApp.appliedDate }}</div>
-                  <div><strong>अंतिम मुदत:</strong> {{ selectedApp.dueDate }}</div>
-                  <div><strong>पेमेंट:</strong> <span class="badge bg-success">₹{{ selectedApp.amount }} ऑनलाईन प्राप्त</span></div>
-                  <div><strong>स्थिती:</strong> <StatusBadge :status="selectedApp.status" :text="selectedApp.statusMr" /></div>
+                  <div><strong>दाखल तारीख:</strong> {{ selectedApp.applied_date }}</div>
+                  <div><strong>अंतिम मुदत:</strong> {{ selectedApp.due_date }}</div>
+                  <div><strong>पेमेंट:</strong> <span class="badge bg-success">₹{{ selectedApp.service.fee }} ऑनलाईन प्राप्त</span></div>
+                  <div><strong>स्थिती:</strong> <StatusBadge :status="selectedApp.status" :text="selectedApp.status" /></div>
                 </div>
               </div>
             </div>
@@ -172,43 +213,164 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useMockData } from '../../composables/useMockData';
+<script setup lang="ts">  
+import { ref, onMounted } from 'vue';
+// import { useMockData } from '../../composables/useMockData';
 import DashboardHeader from '../../components/common/DashboardHeader.vue';
 import StatusBadge from '../../components/common/StatusBadge.vue';
 import ResponsiveTable from '../../components/common/ResponsiveTable.vue';
+import {getCitizenApplications} from '../../services/citizenService';
 
-const { citizenApplications } = useMockData();
-
-const activeFilter = ref('ALL');
+const applications = ref<any[]>([]);
+const activeFilter = ref('All');
 const searchQuery = ref('');
 const selectedApp = ref<any>(null);
 
-const myApps = computed(() => citizenApplications.value);
-const pendingCount = computed(() => myApps.value.filter(a => a.status === 'Pending Verification').length);
-const generatedCount = computed(() => myApps.value.filter(a => a.status === 'Certificate Generated').length);
-
-const filteredApps = computed(() => {
-  return myApps.value.filter(a => {
-    const matchesFilter = 
-      activeFilter.value === 'ALL' ||
-      (activeFilter.value === 'Pending' && a.status === 'Pending Verification') ||
-      (activeFilter.value === 'Generated' && a.status === 'Certificate Generated');
-
-    const matchesSearch = !searchQuery.value || 
-      a.applicationNo.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      a.serviceNameMr.toLowerCase().includes(searchQuery.value.toLowerCase());
-
-    return matchesFilter && matchesSearch;
-  });
+const counts = ref({
+  total: 0,
+  pending: 0,
+  approved: 0,
+  rejected: 0,
 });
+const pagination = ref({
+  current_page: 1,
+  last_page: 1,
+  total: 0,
+  per_page : 3
+});
+async function loadApplications(status: string = '', page: number = 1) {
+  try {
+    // alert()
+    const params: any = {};
+    if (status) {
+      params.status = status;
+    }
+    if(page){
+      params.page = page
+    }
+    // alert(params.status)
+    if (searchQuery.value.trim()) {
+      params.search = searchQuery.value;
+    }
+
+    // console.log(params);
+    // const response = await getCitizenApplications(params);
+        // const response = await (getCitizenApplications as any)(params);
+const response = await getCitizenApplications(params);
+// console.log(response)
+    applications.value = response.all_applications;
+    pagination.value = response.pagination;
+    counts.value = response.counts;
+    counts.value = response.counts;
+    // pagination.value = {
+    //   current_page: response.all_applications.meta.current_page,
+    //   last_page: response.all_applications.meta.last_page,
+    //   total: response.all_applications.meta.total,
+    // };
+    
+    // console.log(counts.value);
+  } catch (error:any) {
+      console.error('Error fetching citizen dashboard data:', error);
+  }
+} 
+
+onMounted(async () => {
+  loadApplications();
+})
+
+function changeFilter(filter: string) {
+  activeFilter.value = filter;
+// console.log(filter);
+  switch (filter) {
+   
+  case 'Pending':
+      loadApplications('pending', 1);
+      break;
+    case 'Approved':
+      loadApplications('approved', 1);
+      break;
+
+    case 'Rejected':
+      loadApplications('rejected', 1);
+      break;
+
+    default:
+      loadApplications('', 1);
+  }
+}
+function changePage(page: number) {
+  if (page < 1 || page > pagination.value.last_page) return;
+
+  switch (activeFilter.value) {
+    case 'Pending':
+      loadApplications('pending', page);
+      break;
+
+    case 'Approved':
+      loadApplications('approved', page);
+      break;
+
+    case 'Rejected':
+      loadApplications('rejected', page);
+      break;
+
+    default:
+      loadApplications('', page);
+  }
+}
+
 
 function viewDetails(app: any) {
   selectedApp.value = app;
+  // console.log(selectedApp.value)
 }
 
 function downloadCertificate(app: any) {
   alert(`ग्रामपंचायत अधिकृत डिजिटल दाखला (${app.applicationNo}) डाऊनलोड सुरू झाला आहे.`);
 }
+
+function searchApplications(){
+  loadApplications(getCurrentStatus(), 1)
+  // console.log(activeFilter.value)
+}
+
+function getCurrentStatus() {
+  switch (activeFilter.value) {
+    case 'Pending':
+      return 'pending';
+
+    case 'Approved':
+      return 'approved';
+
+    case 'Rejected':
+      return 'rejected';
+
+    default:
+      return '';
+  }
+}
+// const { citizenApplications } = useMockData();
+
+
+
+// const myApps = computed(() => citizenApplications.value);
+// const pendingCount = computed(() => myApps.value.filter(a => a.status === 'Pending Verification').length);
+// const generatedCount = computed(() => myApps.value.filter(a => a.status === 'Certificate Generated').length);
+
+// const filteredApps = computed(() => {
+//   return myApps.value.filter(a => {
+//     const matchesFilter = 
+//       activeFilter.value === 'ALL' ||
+//       (activeFilter.value === 'Pending' && a.status === 'Pending Verification') ||
+//       (activeFilter.value === 'Generated' && a.status === 'Certificate Generated');
+
+//     const matchesSearch = !searchQuery.value || 
+//       a.applicationNo.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+//       a.serviceNameMr.toLowerCase().includes(searchQuery.value.toLowerCase());
+
+//     return matchesFilter && matchesSearch;
+//   });
+// });
+
+
 </script>

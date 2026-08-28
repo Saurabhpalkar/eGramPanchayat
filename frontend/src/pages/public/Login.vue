@@ -117,7 +117,7 @@ async function handleCitizenLogin() {
       mobile_or_aadhaar: citizenInput.value,
       otp: otpInput.value
     });
-    console.log('OTP verified successfully:', data);
+    // console.log('OTP verified successfully:', data);
     const auth = data.data;
 
     localStorage.setItem('token', auth.token);
@@ -154,7 +154,7 @@ async function handleSendOtp() {
     // alert(`OTP पाठवला आहे (Simulated): 1234`); // Simulate sending OTP
     otpSent.value = true;
     alert(`OTP पाठवला आहे (Simulated): ${data.data.otp}`); // Simulate sending OTP
-    console.log('OTP sent successfully:', `${data.data.otp}`);
+    // console.log('OTP sent successfully:', `${data.data.otp}`);
   } catch (err: any) {
     // console.error('Login error:', err.response?.data);
     error.value =

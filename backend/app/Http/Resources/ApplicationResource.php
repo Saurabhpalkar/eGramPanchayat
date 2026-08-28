@@ -25,7 +25,9 @@ class ApplicationResource extends JsonResource
             'due_date' => $this->due_date,
             'approved_date' => $this->approved_date,
             'remarks' => $this->remarks,
-            'service' => $this->service,
+            'service' => $this->whenLoaded('service'),
+            'user' => $this->whenLoaded('user'),
+
         ];
     }
 }

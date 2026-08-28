@@ -34,7 +34,13 @@ class AuthService
                 'user' => [
                     'id' => $user->id,
                     'name' => $user->name,
+                    'name_mr' => $user->name_mr,
                     'email' => $user->email,
+                    'mobile' => $user->mobile,
+                    'aadhaar_number' => $user->aadhaar_number,
+                    'ward_id' => $user->ward_id,
+                    'dob' => $user->dob,
+                    'gender' => $user->gender,
                 ],
                 'roles' => $user->getRoleNames(),
             ],
@@ -48,5 +54,4 @@ class AuthService
     {
         $user->currentAccessToken()?->delete();
     }
-    
 }

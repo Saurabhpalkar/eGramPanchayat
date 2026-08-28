@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\user\CitizenDashboardController;     
+use App\Http\Controllers\Api\V1\user\CitizenApplicationController;     
+use App\Http\Controllers\Api\V1\user\CitizenServiceController;     
 
 Route::prefix('v1')->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login']);
@@ -14,5 +16,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/send-otp', [AuthController::class, 'sendOtp']);
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/citizen/dashboard', [CitizenDashboardController::class, 'index']);
+        Route::get('/citizen/application',[CitizenApplicationController::class, 'index']);
+        Route::post('/citizen/application/apply',[CitizenApplicationController::class, 'store']);
+        Route::get('/citizen/services',[CitizenServiceController::class, 'index']);
     });
 });

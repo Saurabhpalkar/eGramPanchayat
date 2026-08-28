@@ -15,6 +15,7 @@ use App\Http\Requests\VerifyOtpRequest;
 use Illuminate\Support\Facades\Cache;
 use Psy\Readline\Hoa\Console;
 use Illuminate\Support\Facades\Log;
+
 class AuthController extends Controller
 {
     use ApiResponseTrait;
@@ -53,7 +54,13 @@ class AuthController extends Controller
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
+                'name_mr' => $user->name_mr,
                 'email' => $user->email,
+                'mobile' => $user->mobile,
+                'aadhaar_number' => $user->aadhaar_number,
+                'ward_id' => $user->ward_id,
+                'dob' => $user->dob,
+                'gender' => $user->gender,
             ],
             'roles' => $user->getRoleNames(),
         ], 'Profile fetched successfully.');
@@ -74,13 +81,12 @@ class AuthController extends Controller
 
     public function sendOtp(SendOtpRequest $request)
     {
-
         $validated = $request->validated();
         $mobile_or_aadhaar = $validated['mobile_or_aadhaar'];
         $user = User::where('mobile', $mobile_or_aadhaar)
             ->orWhere('aadhaar_number', $mobile_or_aadhaar)
             ->first();
-         if (! $user) {
+        if (! $user) {
             return response()->json([
                 'success' => false,
                 'message' => 'Mobile number or Aadhaar number is not registered.',
@@ -90,16 +96,15 @@ class AuthController extends Controller
         Cache::put('otp_' . $mobile_or_aadhaar, $otp, now()->addMinutes(5));
         // Log::info('otp for'. $user->mobile_or_aadhaar.' is '.$otp);
         // Cache::put('otp_' . $user->mobile_or_aadhaar, $otp, now()->addMinutes(5));
-        Log::info('OTP for ' . $mobile_or_aadhaar . ' is ' . $otp);
+        // Log::info('OTP for ' . $mobile_or_aadhaar . ' is ' . $otp);
 
-          return response()->json([
+        return response()->json([
             'success' => true,
             'message' => 'OTP sent successfully.',
             'data' => [
                 'otp' => $otp, // For testing purposes; remove in production
             ],
         ]);
-        
     }
     public function verifyOtp(VerifyOtpRequest $request)
     {
@@ -125,8 +130,8 @@ class AuthController extends Controller
         Cache::forget('otp_' . $input);
 
         $user = User::where('mobile', $input)
-                    ->orWhere('aadhaar_number', $input)
-                    ->first();
+            ->orWhere('aadhaar_number', $input)
+            ->first();
 
         $user->tokens()->delete();
 
@@ -140,8 +145,13 @@ class AuthController extends Controller
                 'user' => [
                     'id' => $user->id,
                     'name' => $user->name,
+                    'name_mr' => $user->name_mr,
                     'email' => $user->email,
                     'mobile' => $user->mobile,
+                    'aadhaar_number' => $user->aadhaar_number,
+                    'ward_id' => $user->ward_id,
+                    'dob' => $user->dob,
+                    'gender' => $user->gender,
                 ],
                 'roles' => $user->getRoleNames(),
             ],
@@ -159,8 +169,6 @@ class AuthController extends Controller
             'ward_id' => $validated['ward_id'] ?? null,
             'dob' => $validated['dob'] ?? null,
             'gender' => $validated['gender'] ?? null,
-            
-            
         ]);
 
         $user->assignRole('user');
@@ -171,7 +179,13 @@ class AuthController extends Controller
             'data' => [
                 'id' => $user->id,
                 'name' => $user->name,
+                'name_mr' => $user->name_mr,
                 'email' => $user->email,
+                'mobile' => $user->mobile,
+                'aadhaar_number' => $user->aadhaar_number,
+                'ward_id' => $user->ward_id,
+                'dob' => $user->dob,
+                'gender' => $user->gender,
                 'roles' => $user->getRoleNames(),
             ],
         ], 201);

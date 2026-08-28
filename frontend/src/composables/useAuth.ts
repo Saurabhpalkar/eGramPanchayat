@@ -3,6 +3,12 @@ import { logout as logoutApi } from '@/services/authService';
 // export type UserRole = 'public' | 'citizen' | 'staff' | 'admin' | 'superadmin';
 export type UserRole = 'public' | 'user' | 'staff' | 'admin' | 'super_admin';
 export interface UserProfile {
+  name_mr?: string;
+  mobile: string;
+  aadhaar_number?: string;
+  ward_id?: number;
+  dob?: string;
+  gender?: string;
   id: string;
   name: string;
   email: string;
@@ -177,11 +183,7 @@ export function useAuth() {
       selectedPanchayat.value = found;
     }
   }
-  //   function logout() {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('user');
-  //   localStorage.removeItem('roles');
-  // }
+
  async function logout() {
     try {
       await logoutApi();
@@ -197,7 +199,7 @@ export function useAuth() {
     user,
     roles,
     activeRole,
-    activePanchayat,
+    activePanchayat,  
     availablePanchayats,
     isAuthenticated,
     mockUsers,
