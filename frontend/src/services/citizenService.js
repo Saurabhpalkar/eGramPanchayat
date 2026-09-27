@@ -20,3 +20,14 @@ export async function submitCitizenApplication(data) {
   // console.log(response)
   return response.data;
 }
+
+export async function createPaymentOrder(params) {
+  const response = await api.post('/citizen/payment/order', {application_id:params});
+  return response.data;
+}
+
+
+export async function verifyPayment(data) {
+  const response = await api.post('/citizen/payment/verify', data);
+  return response.data;
+}

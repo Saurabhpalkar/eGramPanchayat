@@ -450,10 +450,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Voice assistant (mic button) -->
-    <VoiceApplyAssistant hide-launcher :services="services" :form="formData" @select-service="selectService"
-      @go-to-step="onVoiceStep" @submit="submitFinalApplication" />
   </div>
 </template>
 
@@ -463,7 +459,6 @@ import { useRoute, useRouter } from 'vue-router';
 import { useMockData } from '../../composables/useMockData';
 import { useAuth } from '../../composables/useAuth';
 import DashboardHeader from '../../components/common/DashboardHeader.vue';
-import VoiceApplyAssistant from '../../components/common/VoiceApplyAssistant.vue';
 import { getCitizenServices, submitCitizenApplication, createPaymentOrder, verifyPayment } from '@/services/citizenService.js';
 
 const route = useRoute();
@@ -522,10 +517,6 @@ function selectService(srv: any) {
   // console.log(selectedService)
   step.value = 2;
   // console.log(step.value)
-}
-
-function onVoiceStep(n: number) {
-  step.value = n;
 }
 
 function onFileSelected(key: string, e: Event) {

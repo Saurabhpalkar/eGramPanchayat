@@ -55,6 +55,8 @@
             <th>अंतिम मुदत</th>
             <th>सद्यस्थिती</th>
             <th>ॲक्शन</th>
+            <th>पेमेंट</th>
+            <th>पेमेंट करा</th>
           </tr>
         </template>
         <template #body>
@@ -69,6 +71,26 @@
                 ट्रॅक करा
               </router-link>
             </td>
+            <td><StatusBadge :status="app.payment?.status || 'Not Paid'" :text="app.payment?.status || 'Not Paid'" /></td>
+            <td>
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill px-2.5 py-0.5 text-xs"
+              :class="
+                app.payment?.status === 'paid'
+                  ? 'btn-secondary'
+                  : 'btn-outline-primary'
+              "
+              :disabled="app.payment?.status === 'paid'"
+              @click="payApplicationFees(app)"
+            >
+              {{
+                app.payment?.status === 'paid'
+                  ? 'पेमेंट झाले'
+                  : 'पेमेंट करा'
+              }}
+            </button>
+          </td>
           </tr>
         </template>
       </ResponsiveTable>
@@ -84,7 +106,8 @@ import DashboardHeader from '../../components/common/DashboardHeader.vue';
 import StatsCard from '../../components/common/StatsCard.vue';
 import StatusBadge from '../../components/common/StatusBadge.vue';
 import ResponsiveTable from '../../components/common/ResponsiveTable.vue';
-import {getCitizenDashboard} from '../../services/citizenService';
+import {getCitizenDashboard, createPaymentOrder, verifyPayment} from '../../services/citizenService';
+import router from '@/router/index.ts';
 // const { user } = useAuth();
 // const { citizenApplications, complaints } = useMockData();
 
@@ -109,12 +132,117 @@ const stats = ref({
   pending_applications: 0,
   rejected_applications: 0,
 })
-  onMounted (async () => {
 
+async function payApplicationFees(app: Record<string, unknown>) {
+  // alert('Pay Application Fees clicked for application: ' + app.id);
+  const paymentResponse = await createPaymentOrder(app.id); 
+    // console.log('Payment Response:', paymentResponse);
+    const razorpayData = paymentResponse.data.razorpay;
+
+    // console.log('Razorpay data:', razorpayData);
+
+    const options: RazorpayOptions = {
+      key: razorpayData.key,
+
+      amount: razorpayData.amount,
+
+      currency: razorpayData.currency,
+
+      name: 'eGram Panchayat',
+
+      // description: `Application ${application.application_no}`,
+
+      order_id: razorpayData.order_id,
+
+      // prefill: {
+      //   name: formData.applicantName,
+      //   email: formData.email,
+      //   contact: formData.mobile,
+      // },
+
+      theme: {
+        color: '#2E7D32',
+      },
+
+      handler: async function (response) {
+
+        // console.log('========== RAZORPAY SUCCESS ==========');
+        // console.log(response);
+
+        // console.log('Payment ID:', response.razorpay_payment_id);
+        // console.log('Order ID:', response.razorpay_order_id);
+        // console.log('Signature:', response.razorpay_signature);
+
+        // Verify payment with Laravel
+        try {
+
+          const verifyData = {
+            application_id: app.id,
+
+            razorpay_payment_id:
+              response.razorpay_payment_id,
+
+            razorpay_order_id:
+              response.razorpay_order_id,
+
+            razorpay_signature:
+              response.razorpay_signature,
+          };
+
+          console.log('Sending verification data:', verifyData);
+
+          const verifyResponse = await verifyPayment(verifyData);
+
+          console.log('Payment verification response:', verifyResponse);
+
+          // After successful verification
+       // ONLY after backend verification
+    // submittedApp.value = {
+    //   applicationNo:
+    //     application.application_no,
+
+    //   serviceNameMr:
+    //     selectedService.value?.name_mr,
+
+    //   dueDate:
+    //     application.due_date,
+
+    //   paymentId:
+    //     response.razorpay_payment_id,
+
+    //   amount:
+    //     verifyResponse.data.payment.amount,
+
+    //   paymentStatus:
+    //     'paid'
+    // };
+        } catch (error: any) {
+
+          console.error('Payment verification failed:', error);
+
+          // submitError.value =
+          //   error.response?.data?.message ||
+          //   'पेमेंट पडताळणी अयशस्वी झाली.';
+        }
+      },
+
+      modal: {
+        ondismiss: function () {
+          console.log('Razorpay checkout closed');
+        }
+      }
+    };
+
+    const razorpay = new Razorpay(options);
+
+    razorpay.open();
+}
+onMounted(loadDashboard);
+async function loadDashboard() {
     try {
       // console.log(localStorage.getItem('user'));
       const response = await getCitizenDashboard();
-      // console.log('Citizen dashboard data fetched successfully:', response.user);
+      // console.log('Citizen dashboard data fetched successfully:', response);
       user.value = response.user;
       stats.value = response.stats;
       recentApplications.value = response.recent_applications;
@@ -123,6 +251,6 @@ const stats = ref({
     } catch (error) { 
       // console.error('Error fetching citizen dashboard data:', error);
     } 
-  })
+  }
 
 </script>

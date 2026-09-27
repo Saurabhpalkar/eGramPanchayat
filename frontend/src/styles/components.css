@@ -262,3 +262,6 @@
   color: #0369A1;
   border: 1px solid rgba(2, 132, 199, 0.25);
 }
+.sidebar .nav-link {
+  background-color: #f7f7f7;
+}

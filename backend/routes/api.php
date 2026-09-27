@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\user\CitizenDashboardController;     
 use App\Http\Controllers\Api\V1\user\CitizenApplicationController;     
 use App\Http\Controllers\Api\V1\user\CitizenServiceController;     
+use App\Http\Controllers\Api\V1\user\CitizenPaymentController;     
 
 Route::prefix('v1')->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login']);
@@ -19,5 +20,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/citizen/application',[CitizenApplicationController::class, 'index']);
         Route::post('/citizen/application/apply',[CitizenApplicationController::class, 'store']);
         Route::get('/citizen/services',[CitizenServiceController::class, 'index']);
+        Route::post('/citizen/payment/order',[CitizenPaymentController::class, 'createOrder']);
+        Route::post('/citizen/payment/verify',[CitizenPaymentController::class, 'verifyPayment']);
     });
 });

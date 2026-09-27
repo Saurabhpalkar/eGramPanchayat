@@ -18,7 +18,7 @@ class CitizenDashboardController extends Controller
             'pending_applications' => Application::where('user_id', $user->id)->where('status', 'pending')->count(),
             'rejected_applications' => Application::where('user_id', $user->id)->where('status', 'rejected')->count(),
         ];
-        $recentApplications = $user->applications()->with('service')->latest()->take(5)->get();
+        $recentApplications = $user->applications()->with(['service', 'payment'])->latest()->take(5)->get();
         return response()->json([
             'success' => true,
             'message' => 'Citizen dashboard data retrieved successfully.',

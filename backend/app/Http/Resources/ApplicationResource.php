@@ -27,6 +27,7 @@ class ApplicationResource extends JsonResource
             'remarks' => $this->remarks,
             'service' => $this->whenLoaded('service'),
             'user' => $this->whenLoaded('user'),
+            'payment' => $this->whenLoaded('payment'),
 
         ];
     }

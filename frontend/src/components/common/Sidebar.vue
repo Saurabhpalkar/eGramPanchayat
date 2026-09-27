@@ -23,7 +23,7 @@
     </div>
 
     <!-- Role-Based Navigation Links -->
-    <div class="flex-grow-1 px-2 overflow-y-auto">
+    <div class="flex-grow-1 px-2 overflow-y-auto sidebar" >
       <!-- Citizen Links -->
       <div v-if="activeRole === 'user'" class="nav flex-column gap-1 font-sans">
         <div class="px-3 text-uppercase text-xs fw-bold text-muted mb-1">नागरिक पोर्टल (Citizen)</div>
